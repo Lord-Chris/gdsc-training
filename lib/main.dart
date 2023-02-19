@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'onboarding.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -10,45 +12,48 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'GDSC Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Onboarding(),
+      // initialRoute: "/",
+      // routes: <String, WidgetBuilder>{
+      //   "/": (context) => const MyHomePage(),
+      //   "/second-page": (context) => const SecondPage(),
+      // },
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Navigate from first screen(MyHomePage) to Second Screen(SecondPage)
+          // 1. Direct Navigation
+          // Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //   return const SecondPage();
+          // }));
+
+          // 2. Named Navigation
+          Navigator.pushNamed(context, '/second-page',
+              arguments: "New page data");
+        },
+        child: const Text(
+          "Next",
+          textAlign: TextAlign.right,
+        ),
+      ),
       appBar: AppBar(
         centerTitle: false,
         title: const Text(
@@ -58,6 +63,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        verticalDirection: VerticalDirection.down,
         children: <Widget>[
           Container(
             margin: const EdgeInsets.all(10),
@@ -72,8 +80,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             child: Center(
               child: Text(
-                "No pain, no gain! \n\n No bug, no learning!!",
+                "No pain, no gain! \n\n No bug no learning!!",
                 textAlign: TextAlign.center,
+                // maxLines: 1,
+                // overflow: TextOverflow.clip,
                 style: TextStyle(
                   fontSize: 40,
                   color: Colors.blue[600],
@@ -100,7 +110,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.white,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.lineThrough,
+                    decoration: TextDecoration.overline,
+                    letterSpacing: 4,
                   ),
                 ),
               ),
@@ -108,12 +119,336 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({
+    Key? key,
+  }) : super(key: key);
+
+  // Stack - Last in first out
+
+  @override
+  Widget build(BuildContext context) {
+    final data = ModalRoute.of(context)!.settings.arguments;
+    return Scaffold(
+      appBar: AppBar(
+        // automaticallyImplyLeading: true,
+        title: Text(
+          data as String,
+          textAlign: TextAlign.right,
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
+      body: GridView(
+        gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        children: const [
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            "My Name",
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
